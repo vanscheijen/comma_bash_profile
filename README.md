@@ -11,7 +11,7 @@ via sudo or doas while retaining the profile.
 
 ## Installation
 
-Install this git repo in ~/local/share/comma_bash_profile:
+Install this git repo in ~/.local/share/comma_bash_profile:
 
 ```
 cd ~/.local/share/ && git clone http://github.com/vanscheijen/comma_bash_profile
