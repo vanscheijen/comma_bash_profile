@@ -1,3 +1,4 @@
+# BEGIN EXCLUDE
 # When using wayland, enable various wayland features
 if [[ "$WAYLAND_DISPLAY" ]]; then
     # GTK3
@@ -22,7 +23,10 @@ if [[ "$WAYLAND_DISPLAY" ]]; then
     # Java
     export _JAVA_AWT_WM_NONREPARENTING=1
 
+    # Kitty
+    export KITTY_ENABLE_WAYLAND=1
+
     # Alias to enforce X11 mode via Xwayland
     alias ,x11="GDK_BACKEND=x11 CLUTTER_BACKEND=gdk QT_QPA_PLATFORM=xcb MOZ_ENABLE_WAYLAND=0 SDL_VIDEODRIVER=x11"
 fi
-
+# END EXCLUDE

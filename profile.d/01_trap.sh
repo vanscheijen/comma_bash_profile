@@ -1,4 +1,4 @@
-## Trap handling
+# Trap handling
 
 ,,trap () {
     ,echo -n "${CURSOR_NEXTLINE}"

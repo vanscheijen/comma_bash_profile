@@ -1,4 +1,4 @@
-## Global variable declarations
+# Global variable declarations
 
 # Bash sometimes struggles with $'\n' depending on the context
 readonly LF=$'\n'

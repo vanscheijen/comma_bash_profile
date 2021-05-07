@@ -31,7 +31,7 @@ EOF
 
     # TODO: Automatically-remove 0-byte when it peaks, this occurs in binaries and compressed formats somehow
     # or just remove peaks all together with a notice? or give option to remove peaks?
-    #python - "$1" <<< "$freqdist" | sort -n | grep -v "^0 " >| "$tmpfile"
+    # python - "$1" <<< "$freqdist" | sort -n | grep -v "^0 " >| "$tmpfile"
 
     ,plot "'$tmpfile' using 1:2:(\$1==10 || \$1==32 ? 0 : \$1>=65 && \$1 <= 122 ? 1 : 2) with boxes palette title 'frequency', '' using 1:3 with lines title 'chi-square' linecolor 'purple'
         set style fill transparent solid 0.5 noborder

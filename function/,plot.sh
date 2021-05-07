@@ -3,6 +3,7 @@
     local f_info="Plots a formula via gnuplot and present it via kitty icat within the terminal window"
     local f_example="plot 'sin(x*3)*exp(x*.2)'; plot 3d 'x**2+y**2, x**2-y**2'"
 
+    ,,require gnuplot || return
     [[ "$1" ]] || { ,,usage; return; }
 
     local plot="plot"

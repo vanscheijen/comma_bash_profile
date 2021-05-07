@@ -1,6 +1,6 @@
+# BEGIN EXCLUDE
 # This function can be used as a bootstrap and therefor should *not* be
 # dependent on (internal) comma functions or declarations.
-
 ,,make_profile () {
     [[ -d "$COMMA_PROFILEDIR" ]] || { ,,usage; return 61; }
 
@@ -50,7 +50,8 @@
         echo "COMMA_PROFILEDIR was not set, defaulting to $COMMA_PROFILEDIR"
     fi
 
+    # Reload this file to effectuate changes immediatly
     source "$COMMA_PROFILEDIR/function/,make_profile.sh"
     ,,make_profile
 }
-
+# END EXCLUDE

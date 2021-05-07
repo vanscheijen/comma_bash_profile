@@ -1,4 +1,4 @@
-## vi-like bash
+# vi-like bash
 set -o vi
 bind 'set show-mode-in-prompt on'
 bind "set vi-ins-mode-string \1${CURSOR_STYLE_HLINE}\2"

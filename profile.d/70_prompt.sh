@@ -1,4 +1,4 @@
-## Set bash prompt
+# Set bash prompt
 
 USER_COLOR="${DIM}${DIMCYAN}"
 [[ "$EUID" == "0" ]] && USER_COLOR="$RED"

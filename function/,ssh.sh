@@ -37,7 +37,7 @@
         # Only initialize if we don't have a master connection yet
         if ! /usr/bin/ssh -O check "$host" &>/dev/null; then
             local bash_profile_base64
-            bash_profile_base64=`base64 "$HOME/.bash_profile"`
+            bash_profile_base64=`sed '/^# BEGIN EXCLUDE$/,/^# END EXCLUDE$/d;/^ *# /d' "$HOME/.bash_profile" | base64`
             local cp_command="base64 -d -i <<< '$bash_profile_base64' >| ~/.bash_profile; true"
             # Copy bash profile
             /usr/bin/ssh -C $params "$host" "$cp_command" 2>/dev/null

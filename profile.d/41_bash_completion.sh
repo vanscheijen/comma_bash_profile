@@ -1,4 +1,4 @@
-## Fix bash completion
+# Fix bash completion
 complete -A hostname   telnet ping ssh
 complete -A export     printenv env
 complete -A variable   export local readonly unset

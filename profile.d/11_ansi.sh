@@ -1,4 +1,4 @@
-## ANSI escape sequences
+# ANSI escape sequences
 
 # Set graphical renditions
 readonly RESET="\033[0m"

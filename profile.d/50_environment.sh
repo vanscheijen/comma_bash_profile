@@ -1,4 +1,4 @@
-## Set default environment
+# Set default environment
 umask 0022
 
 # Prevent file overwrite on stdout redirection
@@ -14,7 +14,7 @@ set -o notify
 # Do not fork last pipe in command lines
 shopt -s lastpipe &>/dev/null
 
-## Better directory navigation
+# Better directory navigation
 # Prepend cd to directory names automatically
 shopt -s autocd &>/dev/null
 # Correct spelling errors during tab-completion
