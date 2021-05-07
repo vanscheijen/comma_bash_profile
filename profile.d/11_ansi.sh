@@ -116,6 +116,9 @@ readonly SCROLL_UP="\033[1S"
 readonly SCROLL_DOWN="\033[1T"
 
 # 256 color support
+VGACOLOR () { [[ $1 -ge 0 && $1 -lt 256 ]] && printf "\033[38;5;$1m"; }
+
+# 24 bit color support
 # Usage: (BG|TERM)RGBCOLOR <24 bit hex color code>
 RGBCOLOR () {
     [[ "$1" =~ ^[0-9a-fA-F]{6}$ ]] && printf "\033[38;2;$((16#${1:0:2}));$((16#${1:2:2}));$((16#${1:4:2}))m"
