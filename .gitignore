@@ -1,0 +1,4 @@
+.bash_profile
+.bash_profile.backup
+profile.d/9[0-9]_*
+profile.d/[0-9]9_*
