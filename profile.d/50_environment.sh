@@ -61,5 +61,6 @@ if [[ "$EUID" == "0" ]]; then
     export USER=root
     export HISTFILE=/root/.bash_history
     #/usr/bin/chattr +a "$HISTFILE"
+    cd
 fi
 
