@@ -62,11 +62,11 @@ This is just a guideline, only the order of execution is important:
 
 |Range|Usage|
 |---|---|
-|00|Functions|
-|10|Declarations|
-|20|Aliases|
-|30|Input configuration (readline)|
-|40|Sourcing of other scripts|
+|00|Sourcing of other scripts|
+|10|Functions|
+|20|Declarations|
+|30|Aliases|
+|40|Input configuration (readline)|
 |50|Environment|
 |60|Reserved|
 |70|Prompt|
