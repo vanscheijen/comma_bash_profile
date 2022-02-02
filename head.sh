@@ -1,6 +1,6 @@
 #!/bin/bash
 ## Comma .bash_profile | https://github.com/vanscheijen/comma_bash_profile
-## ©2012-2021 vanScheijen
+## ©2012-2022 vanScheijen
 ## Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
 ## DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.
 
