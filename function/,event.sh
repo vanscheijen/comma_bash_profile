@@ -17,7 +17,7 @@
             show_graphs=1
         elif [[ -z "$eventname" ]]; then
             eventname="$arg"
-        elif [[ -z "$count" ]]; then
+        elif [[ "$count" == " 1" ]]; then
             count=" $arg"
         fi
     done
