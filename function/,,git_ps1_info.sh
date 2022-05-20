@@ -1,7 +1,7 @@
 ,,git_ps1_info () {
     # \[ and \] are passed as $1 and $2, so we can escape non-printables
     # Theoretically we could also use ${SYMBOL_GIT_BRANCH@P} to simply use \[ and \]
-    local SYMBOL_GIT_BRANCH="${1}${PURPLE}${2}⑂${1}${CYAN}${2}"
+    local SYMBOL_GIT_BRANCH="${1}${PURPLE}${2}${1}${CYAN}${2}"
     local SYMBOL_GIT_TAG="${1}${DIMYELLOW}${2}tag${1}${CYAN}${2}"
     local SYMBOL_GIT_MODIFIED="${1}${RED}${2}*${1}${CYAN}${2}"
     local SYMBOL_GIT_PUSH="${1}${BLUE}${2}↑${1}${CYAN}${2}"
