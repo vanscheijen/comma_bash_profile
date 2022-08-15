@@ -15,10 +15,10 @@
     local -i style="$2"
     local title="$3"
     local columns text stripped width
-    columns=`stty size`; columns="${columns##* }"
-    text=`fmt --width=$columns <<< "$1"`
-    stripped=`printf "$text" | sed "s#\x1B\[[0-9;]*[a-zA-Z]##g"`
-    width=`awk 'length > m { m = length; a = $0 } END { print a }' <<< "ll${title}rr$LF$stripped"`
+    columns=$(stty size); columns="${columns##* }"
+    text=$(fmt --width=$columns <<< "$1")
+    stripped=$(printf "$text" | sed "s#\x1B\[[0-9;]*[a-zA-Z]##g")
+    width=$(awk 'length > m { m = length; a = $0 } END { print a }' <<< "ll${title}rr$LF$stripped")
 
     printf "${ulcorner[$style]}"
     local -i i
@@ -26,10 +26,10 @@
         printf "${horizontal[$style]}"
     done
     printf "${urcorner[$style]}"
-    [[ "$title" ]] && printf "`CURSOR_HORIZONTAL 3`${leftot[$style]}${title}${rightot[$style]}\n" || printf "\n"
+    [[ "$title" ]] && printf "$(CURSOR_HORIZONTAL 3)${leftot[$style]}${title}${rightot[$style]}\n" || printf "\n"
     local line
     while read -r line; do
-        ,echo "${vertical[$style]}${line}`CURSOR_HORIZONTAL $((${#width} + 2))`${vertical[$style]}"
+        ,echo "${vertical[$style]}${line}$(CURSOR_HORIZONTAL $((${#width} + 2)))${vertical[$style]}"
     done <<< "$text"
     printf "${dlcorner[$style]}"
     for ((i=0; i < ${#width}; i++)); do

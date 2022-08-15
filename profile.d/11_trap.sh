@@ -7,7 +7,7 @@
     # trap "" SIGHUP
 
     ,echo -n "${CURSOR_NEXTLINE}"
-    ,box "`,debug "Trapped $@"`"
+    ,box "$(,debug "Trapped $@")"
     exit 50
 }
 

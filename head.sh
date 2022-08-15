@@ -10,7 +10,7 @@ if ((BASH_VERSINFO[0] < 3)); then
 fi
 
 if [[ "$COMMA_VERSION" ]]; then
-    ,ok "`RGBCOLOR FF5600`Comma `RGBCOLOR 00C786`.bash_profile ${DIMGRAY}v${DIMCYAN}${COMMA_VERSION}${DIMGRAY}-${DIMGREEN}${COMMA_DATE_GENERATED}${RESET} already loaded"
+    ,ok "$(RGBCOLOR FF5600)Comma $(RGBCOLOR 00C786).bash_profile ${DIMGRAY}v${DIMCYAN}${COMMA_VERSION}${DIMGRAY}-${DIMGREEN}${COMMA_DATE_GENERATED}${RESET} already loaded"
     return 0
 fi
 

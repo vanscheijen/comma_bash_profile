@@ -6,7 +6,7 @@
 
     if [[ "$style" == "gray" ]]; then
         for i in {232..255} {254..232}; do
-            ,echo -n "`VGACOLOR ${i}`─"
+            ,echo -n "$(VGACOLOR ${i})─"
         done
         echo
         return

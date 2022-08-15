@@ -5,12 +5,12 @@
     [[ -d "$COMMA_PROFILEDIR" ]] || { ,,usage; return 61; }
 
     local tmpfile
-    tmpfile=`mktemp`
+    tmpfile=$(mktemp)
     local profile="$COMMA_PROFILEDIR/.bash_profile"
 
     # Generate profile
     cat "$COMMA_PROFILEDIR/head.sh" "$COMMA_PROFILEDIR/function/"*.sh "$COMMA_PROFILEDIR/profile.d/"*.sh "$COMMA_PROFILEDIR/tail.sh" >| "$tmpfile"
-    sed -i "s/^# %COMMA_DATE_GENERATED%$/COMMA_DATE_GENERATED=\"`date +%Y-%m-%d`\"/" "$tmpfile"
+    sed -i "s/^# %COMMA_DATE_GENERATED%$/COMMA_DATE_GENERATED=\"$(date +%Y-%m-%d)\"/" "$tmpfile"
 
     ,,test_profile () {
         [[ -f "$profile" ]] && diff -q "$profile" "$tmpfile" &>/dev/null && return 1

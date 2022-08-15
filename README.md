@@ -51,7 +51,6 @@ Use Ctrl-z to switch between background and foreground.
 * Internal functions are prefixed with two comma's, e.g. `,,require` and are not for command line usage
 * The filenames in function/ and profile.d/ are arbitrary, the .sh suffix is just so vim understands the syntax
 
-* Backticks work just fine and have a clean look. I only use $() when I need the nested functionality
 * I prefer bash internals over externals, but for compatibility I minimize bash 4+ features
 
 ## profile.d numbers

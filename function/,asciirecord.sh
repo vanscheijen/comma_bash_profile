@@ -4,6 +4,6 @@
 
     ,,require asciinema || return
 
-    asciinema rec "`mktemp ~/Pictures/Recording/"$(date +%Y-%m-%d-%H-%M-%S)-XXX" --suffix=.cast`"
+    asciinema rec "$(mktemp ~/Pictures/Recording/"$(date +%Y-%m-%d-%H-%M-%S)-XXX" --suffix=.cast)"
 }
 # END EXCLUDE

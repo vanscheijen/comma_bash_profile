@@ -7,8 +7,8 @@ bind "set vi-cmd-mode-string \1${CURSOR_STYLE_BLOCK}\2"
 bind 'RETURN: "\e\n"'
 
 # Idea of setting whole window background color, but it's annoying
-#bind "set vi-ins-mode-string \1${CURSOR_STYLE_HLINE}`TERMRGBCOLOR 000000`\2"
-#bind "set vi-cmd-mode-string \1${CURSOR_STYLE_BLOCK}`TERMRGBCOLOR 113355`\2"
+#bind "set vi-ins-mode-string \1${CURSOR_STYLE_HLINE}$(TERMRGBCOLOR 000000)\2"
+#bind "set vi-cmd-mode-string \1${CURSOR_STYLE_BLOCK}$(TERMRGBCOLOR 113355)\2"
 
 # Readline customizations
 bind 'set bell-style visible'

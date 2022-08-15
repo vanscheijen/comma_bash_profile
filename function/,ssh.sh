@@ -6,14 +6,14 @@
     local params=""
 
     local args
-    args=`getopt 1246AaCfgKkMNnqsTtVvXxYb:c:D:e:F:i:L:l:m:O:o:p:R:S:w: $*`
+    args=$(getopt 1246AaCfgKkMNnqsTtVvXxYb:c:D:e:F:i:L:l:m:O:o:p:R:S:w: $*)
     local argstop=0
     local arg
     for arg in $args; do
         if [[ "$arg" == "--" ]]; then
             argstop="1"
         elif [[ "$argstop" == "1" ]]; then
-            host=`,lowercase $arg`
+            host=$(,lowercase $arg)
             argstop="2"
         elif [[ "$argstop" == "2" ]]; then
             ssh_command+="${arg} "
@@ -37,14 +37,14 @@
         # Only initialize if we don't have a master connection yet
         if ! /usr/bin/ssh -O check "$host" &>/dev/null; then
             local bash_profile_base64
-            bash_profile_base64=`sed '/^# BEGIN EXCLUDE$/,/^# END EXCLUDE$/d;/^ *# /d' "$HOME/.bash_profile" | base64`
+            bash_profile_base64=$(sed '/^# BEGIN EXCLUDE$/,/^# END EXCLUDE$/d;/^ *# /d' "$HOME/.bash_profile" | base64)
             local cp_command="base64 -d -i <<< '$bash_profile_base64' >| ~/.bash_profile; true"
             # Copy bash profile
             /usr/bin/ssh -C $params "$host" "$cp_command" 2>/dev/null
 
             if [[ -d "$HOME/.vim/plugins" && "$EUID" != 0 ]]; then
                 local vim_profile_base64
-                vim_profile_base64=`cat "$HOME/.vimrc" "$HOME/.vim/plugins/"*.vim | base64`
+                vim_profile_base64=$(cat "$HOME/.vimrc" "$HOME/.vim/plugins/"*.vim | base64)
                 cp_command="base64 -d -i <<< '$vim_profile_base64' >| ~/.vimrc; true"
                 # Copy vim profile
                 /usr/bin/ssh -C $params "$host" "$cp_command" 2>/dev/null
@@ -56,7 +56,7 @@
 
         # Use a named pipe for logging, this enables kitty remote to work
         local pipefile
-        pipefile=`mktemp -u ${HOME}/.ssh/${host}.XXXXX.pipe`
+        pipefile=$(mktemp -u ${HOME}/.ssh/${host}.XXXXX.pipe)
         mkfifo "$pipefile"
         exec 3>&1 4>&2 &>/dev/null
         tee -a "$logfile" < "$pipefile" >&3 &

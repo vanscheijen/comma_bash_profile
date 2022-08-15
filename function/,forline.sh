@@ -4,10 +4,10 @@
 
     local content
     if [[ -s "$1" ]]; then
-        content=`< "$1"`
+        content=$(< "$1")
         shift
     else
-        content=`,ifne cat`
+        content=$(,ifne cat)
     fi
 
     [[ -n "$@" ]] || set "echo \$line"

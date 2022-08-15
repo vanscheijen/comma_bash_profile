@@ -12,8 +12,8 @@
 
     # get current branch name
     local ref tag
-    ref=`$git_eng symbolic-ref --short HEAD 2>/dev/null`
-    tag=`$git_eng describe --tags --always 2>/dev/null`
+    ref=$($git_eng symbolic-ref --short HEAD 2>/dev/null)
+    tag=$($git_eng describe --tags --always 2>/dev/null)
 
     [[ "$ref" ]] && ref="${SYMBOL_GIT_BRANCH}${ref}"
     [[ "$tag" ]] && tag="${SYMBOL_GIT_TAG}${tag}"

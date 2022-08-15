@@ -9,7 +9,7 @@
                 printf "$c"
                 ;;
             *)
-                printf "%%%x" `printf "%d" "'$c"`
+                printf "%%%x" $(printf "%d" "'$c")
                 ;;
         esac
     done

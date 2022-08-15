@@ -13,6 +13,6 @@ command_not_found_handle () {
 
 # It's possible to use / in a function name, you cannot tab-complete them which makes them semi-hidden
 /me () {
-    ,echo "`whoami` $*"
+    ,echo "$(whoami) $*"
 }
 

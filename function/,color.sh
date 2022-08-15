@@ -10,6 +10,6 @@
     [[ "$color" == "a" ]] && color="300030"
     [[ "$color" == "p" ]] && color="300000"
 
-    TERMRGBCOLOR $color >| `tty`
+    TERMRGBCOLOR $color >| $(tty)
 }
 

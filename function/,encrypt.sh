@@ -6,7 +6,7 @@
 
     local password="$1"
     local data="$2"
-    [[ -s "$data" ]] && data=`< "$data"`
+    [[ -s "$data" ]] && data=$(< "$data")
 
     openssl enc -e --aes-256-cbc -base64 -nosalt -k "$password" <<< "$data" 2>/dev/null
 }

@@ -7,7 +7,7 @@
     local show_graphs=0
 
     local args
-    args=`getopt :g $*`
+    args=$(getopt :g $*)
     local argstop=0
     local arg
     for arg in $args; do
@@ -31,7 +31,7 @@
     if [[ $show_graphs == 1 ]]; then
         ,plot "'$eventfile' using 1:0 with linespoints" "set xdata time;set timefmt \"%s\""
     else
-        echo "`date +%s`$count" >> "$eventfile"
+        echo "$(date +%s)$count" >> "$eventfile"
     fi
 }
 

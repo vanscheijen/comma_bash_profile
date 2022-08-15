@@ -17,13 +17,13 @@
 
     [[ "$DOM" ]] || { ,,usage; return; }
 
-    [[ "$NS" ]] || NS=`dig "$DOM" SOA +short | awk '{print $1}'`
+    [[ "$NS" ]] || NS=$(dig "$DOM" SOA +short | awk '{print $1}')
 
-    echo "`dig "@$NS" "$DOM" "$TYPE" +dnssec +nocmd +noall +answer`"
+    echo "$(dig "@$NS" "$DOM" "$TYPE" +dnssec +nocmd +noall +answer)"
     if [[ "$EXTENDED" ]]; then
         local sub
         for sub in www mail mx smtp pop imap blog en ftp ssh login vpn '*'; do
-            echo "`dig "@$NS" "$sub.$DOM" "$TYPE" +nocmd +noall +answer`"
+            echo "$(dig "@$NS" "$sub.$DOM" "$TYPE" +nocmd +noall +answer)"
         done
     fi
 }

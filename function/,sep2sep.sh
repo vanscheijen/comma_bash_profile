@@ -11,7 +11,7 @@
     local from="${1:-a}"
     local to="${2:- }"
     local content
-    content=`,ifne cat "${3:--}"`
+    content=$(,ifne cat "${3:--}")
 
     [[ "${#from}" == 1 && "${#to}" == 1 && "${#content}" -gt 0 ]] || { ,,usage; return; }
 
