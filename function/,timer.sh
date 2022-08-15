@@ -59,8 +59,8 @@
                 rm -rf "${TMPDIR:-/tmp}/,timer.$BASHPID/"
             }
 
-            trap ",,timer_aborted" TERM
-            trap ",,timer_cleanup" EXIT
+            trap ",,timer_aborted" SIGTERM
+            trap ",,timer_cleanup" SIGEXIT
 
             set -e
             # Wait until alarmtime is reached in half the time-to-wait
