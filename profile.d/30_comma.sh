@@ -24,6 +24,6 @@ alias ,whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 # BEGIN EXCLUDE
 alias ,edit_profile='vim "$COMMA_PROFILEDIR"'
-alias ,moonphase='/usr/bin/curl https://wttr.in/?format=%m; echo'
-alias ,weather='/usr/bin/curl https://wttr.in'
+alias ,moonphase='/usr/bin/curl https://wttr.in/Moon'
+alias ,weather='/usr/bin/curl https://wttr.in/Amersfoort; /usr/bin/curl https://wttr.in/Amersfoort?format=v2'
 # END EXCLUDE
