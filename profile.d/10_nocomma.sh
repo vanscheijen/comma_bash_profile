@@ -3,8 +3,8 @@ command_not_found_handle () {
     ,error "$1: command not found"
 }
 
-# Go to previous path, shortcut for "cd ..", can also use with ".. 2" for doing it twice
-.. () {
+# Go up the directory path, shortcut for "cd ..", can also use with "up 2" for doing it twice
+up () {
     local -i i
     for ((i=0; i < ${1:-1}; i++)); do
         cd ..
