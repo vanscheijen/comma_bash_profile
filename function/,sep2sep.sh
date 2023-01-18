@@ -1,6 +1,6 @@
 ,sep2sep () {
     local f_usage="[-s] [from] [to] [file]"
-    local f_info="Translates separators in [file] (default -) from [from] to [to], by default it is autodetected('a'). Optionally: -s = strip surrounding seperators"
+    local f_info="Translates separators in [file] (default stdin '-') from [from] (default autodetection 'a') to [to] (default space ' '). Optionally: -s = strip surrounding seperators"
 
     local strip=0
     if [[ "$1" == "-s" ]]; then

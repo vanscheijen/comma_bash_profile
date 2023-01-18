@@ -1,6 +1,6 @@
 ,event () {
     local f_usage="[-g] <event name> [optional count]"
-    local f_info="Log an arbitrary event, can be used to track when and how often something occurs."
+    local f_info="Log an arbitrary event, can be used to track when and how often something occurs"
 
     local eventname=""
     local count=" 1"

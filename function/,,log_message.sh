@@ -13,7 +13,7 @@
 
 # Generate logging functions for all loglevels
 for f in debug info ok notice warning error; do
-    eval ",${f} () { ,,log_message \"\$@\"; }"
+    eval ",${f} () { local f_usage=\"<string>\"; local f_info=\"Log <string> as a $f message\"; ,,log_message \"\$@\"; }"
 done
 unset -v f
 

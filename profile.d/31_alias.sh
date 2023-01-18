@@ -27,27 +27,11 @@ fi
 ,have qrencode && alias ,qr="qrencode -lL -t UTF8i -o -"
 ,have resolvectl && alias host="resolvectl query"
 ,have docker && alias ,dockerize_cwd="docker run -it --rm --entrypoint /bin/sh -v \$PWD:/workdir -w /workdir alpine"
+,have btop && alias top="btop"
 
-# Use rust alternatives if available
-# https://zaiste.net/posts/shell-commands-rust/
-[[ -d "$HOME/.cargo/bin" ]] && grep -q "$HOME/.cargo/bin" <<< "$PATH" && export PATH="$HOME/.cargo/bin:$PATH"
-
+# Use some rust alternatives if available. See https://zaiste.net/posts/shell-commands-rust/
+[[ -d "$HOME/.cargo/bin" ]] && grep -q "$HOME/.cargo/bin" <<< "$PATH" || export PATH="$HOME/.cargo/bin:$PATH"
 ,have dust && alias ,diskusage="dust"
-if ,have rg; then
-    ,,rg () {
-        local arg
-        for arg; do
-            [[ "$arg" == "-r" ]] && shift
-            [[ "$arg" == "-ri" ]] && { shift; set -- '-i' "$@"; }
-        done
-        rg "$@"
-    }
-    alias grep=",,rg"
-fi
-,have ytop && alias top="ytop"
-,have exa && alias exa="exa -FlaG --color=always"
-#,have fd && alias find="fd"
-#,have procs && alias p="procs"
 
 # Superuser alias
 if [[ "$EUID" == "0" ]]; then

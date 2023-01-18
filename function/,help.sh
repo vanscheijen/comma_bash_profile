@@ -1,4 +1,7 @@
 ,help () {
+    local f_usage="<string>"
+    local f_info="Lists all comma commands by default. Optional search for <string>"
+
     local func usage info
     local find="${1##,}"
 

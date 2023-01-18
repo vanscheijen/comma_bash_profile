@@ -1,4 +1,6 @@
 ,lsswap () {
+    local f_info="List swap usage per process"
+
     local -i swap
     local -i swap_pid
     local -i swap_total=0
