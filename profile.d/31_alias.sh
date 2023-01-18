@@ -23,15 +23,15 @@ else
 fi
 
 # Application specific aliases
-,have cal && alias cal="cal -y -w -m --color=auto"
-,have qrencode && alias ,qr="qrencode -lL -t UTF8i -o -"
-,have resolvectl && alias host="resolvectl query"
-,have docker && alias ,dockerize_cwd="docker run -it --rm --entrypoint /bin/sh -v \$PWD:/workdir -w /workdir alpine"
-,have btop && alias top="btop"
+,,have cal && alias cal="cal -y -w -m --color=auto"
+,,have qrencode && alias ,qr="qrencode -lL -t UTF8i -o -"
+,,have resolvectl && alias host="resolvectl query"
+,,have docker && alias ,dockerize_cwd="docker run -it --rm --entrypoint /bin/sh -v \$PWD:/workdir -w /workdir alpine"
+,,have btop && alias top="btop"
 
 # Use some rust alternatives if available. See https://zaiste.net/posts/shell-commands-rust/
 [[ -d "$HOME/.cargo/bin" ]] && grep -q "$HOME/.cargo/bin" <<< "$PATH" || export PATH="$HOME/.cargo/bin:$PATH"
-,have dust && alias ,diskusage="dust"
+,,have dust && alias ,diskusage="dust"
 
 # Superuser alias
 if [[ "$EUID" == "0" ]]; then
@@ -66,7 +66,7 @@ elif [[ -f /usr/bin/vim ]]; then
 fi
 
 # Kitty terminal emulator settings
-if ,have kitty; then
+if ,,have kitty; then
     source <(kitty + complete setup bash)
     alias kitty-diff="kitty +kitten diff"
     alias icat="kitty +kitten icat"

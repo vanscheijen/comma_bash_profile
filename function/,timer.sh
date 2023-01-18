@@ -51,7 +51,7 @@
     {
         (
             ,,timer_aborted() {
-                ,have espeak && espeak -a 200 "The timer was aborted" &
+                ,,have espeak && espeak -a 200 "The timer was aborted" &
                 exit
             }
 
@@ -71,7 +71,7 @@
                 sleep $wait
                 now=$(,,now)
             done
-            ,have espeak && espeak -a 200 "The timer has finished" &
+            ,,have espeak && espeak -a 200 "The timer has finished" &
             eval $action
         ) &
         local timerpid=$!

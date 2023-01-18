@@ -5,7 +5,7 @@
     local hosts="$@"
     local tmux_session_name="cssh"
 
-    ,have tmux || { ,error "Install tmux to use this function"; return 52; }
+    ,,have tmux || { ,error "Install tmux to use this function"; return 52; }
     [[ "${hosts}" ]] || { ,,usage; return; }
 
     # Find a name for a new session

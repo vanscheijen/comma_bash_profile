@@ -51,7 +51,7 @@
             fi
 
             # Copy kitty terminal info if in use
-            # ,have kitty && kitty +kitten ssh "$host" true 2>/dev/null
+            # ,,have kitty && kitty +kitten ssh "$host" true 2>/dev/null
         fi
 
         # Use a named pipe for logging, this enables kitty remote to work

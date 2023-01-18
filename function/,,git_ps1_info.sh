@@ -7,7 +7,7 @@
     local SYMBOL_GIT_PUSH="${1}${BLUE}${2}↑${1}${CYAN}${2}"
     local SYMBOL_GIT_PULL="${1}${GREEN}${2}↓${1}${CYAN}${2}"
 
-    ,have git || return
+    ,,have git || return
     local git_eng="env LANG=C git"
 
     # get current branch name

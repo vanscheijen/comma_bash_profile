@@ -2,8 +2,8 @@
     local f_usage="<host> <port>"
     local f_info="Wrapper for nc or ncat, with fallback for bash internal tcp connection"
 
-    ,have nc && { nc "$@"; return; }
-    ,have ncat && { ncat "$@"; return; }
+    ,,have nc && { nc "$@"; return; }
+    ,,have ncat && { ncat "$@"; return; }
 
     local host="${1%:*}"
     local port="${2:-${1#*:}}"
