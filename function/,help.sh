@@ -10,7 +10,7 @@
         [[ "$line" =~ ^\ *local\ f_usage=\"(.+)\"\;$ ]] && usage="${BASH_REMATCH[1]}"
         [[ "$line" =~ ^\ *local\ f_info=\"(.+)\"\;$ ]] && info="${BASH_REMATCH[1]}"
         if [[ "$line" =~ ^}$ ]]; then
-            if [[ "$func" ]]; then
+            if [[ "$func" && ! "$func" =~ ^,, ]]; then
                 ,echo "${GREEN}${func} ${BLUE}${usage}"
                 [[ "$info" ]] && ,echo "${DIMGRAY}⋯${RESET} ${info}"
             fi
