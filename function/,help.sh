@@ -20,6 +20,8 @@
         fi
     done
 
+    echo
+
     alias -p | grep "^alias ," | while read -r line; do
         [[ "$line" =~ ^alias\ (,${find}.*)=\'(.*)\'$ ]] && ,echo "${GREEN}${BASH_REMATCH[1]} ${BLUE}${BASH_REMATCH[2]//%/%%}"
     done
