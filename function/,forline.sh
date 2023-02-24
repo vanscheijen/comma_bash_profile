@@ -1,6 +1,6 @@
 ,forline () {
     local f_usage="[file] [command]"
-    local f_info="Loops through each line in [file] or stdin and executes [command] (defaults to echo \\\$line)"
+    local f_info="Loops through each line(as \$line) in [file] or stdin (default) and executes [command] (defaults to echo \\\$line)"
 
     local content
     if [[ -s "$1" ]]; then
@@ -10,10 +10,12 @@
         content=$(,ifne cat)
     fi
 
-    [[ -n "$@" ]] || set "echo \$line"
+    [[ "$content" ]] || { ,,usage; return; }
+
+    [[ -n "$@" ]] || set "echo \"\$line\""
 
     local line
-    while read -r line; do
+    while IFS= read -r line; do
         eval "$@"
     done <<< "$content"
 }
