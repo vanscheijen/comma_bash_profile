@@ -7,7 +7,7 @@
     ,info "Stopwatch started, press enter | ctrl-d to stop"
     ,echo "\n"
 
-    until ,ifne; do
+    until read -srt0; do
         elapsed=$(bc -l <<< "$(,,now_nano) - $begin")
         ,echo "${CURSOR_PREVLINE}Running for $elapsed seconds"
         sleep ${1:-0.1}
