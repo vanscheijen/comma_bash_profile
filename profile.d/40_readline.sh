@@ -35,37 +35,39 @@ stty susp ''
 # disable vi-redo so alt-. works normally
 bind -m vi-command -r '.'
 
-# restore some emacs keybindings in vi mode
+# fix key bindings
+bind -m vi-command '"0":beginning-of-line'
 while read -r binding; do
-    for keymap in vi-command vi-insert; do
+    for keymap in emacs vi-command vi-insert; do
         bind -m $keymap "$binding"
     done
     unset -v keymap
 done <<EOF
+" ":magic-space
 "\C-l":clear-screen
 "\C-g":abort
 "\e[1;5C":vi-next-word
 "\e[1;5D":vi-prev-word
 "\e.":yank-last-arg
-"\C-x\C-e":edit-and-execute-command
-"\C-w":backward-kill-word
+"\C-xe":edit-and-execute-command
 "\e[H":beginning-of-line
-"\e[F":end-of-line
 "\eOH":beginning-of-line
-"\eOF":end-of-line
 "\e[1~":beginning-of-line
-"\e[4~":end-of-line
-" ":magic-space
 "\C-a":beginning-of-line
+"\e[F":end-of-line
+"\eOF":end-of-line
+"\e[4~":end-of-line
 "\C-e":end-of-line
 "\C-k":kill-line
 "\eb":backward-word
 "\ef":forward-word
+"\C-w":backward-kill-word
 "\ew":kill-word
-"\em":"\e0wi"
-"\e\e":edit-and-execute-command
+"\em":"\e0wdbi"
 "\e[A":history-search-backward
 "\e[B":history-search-forward
+"\C-xq":"\eb\"\ef\"\ei"
+"\C-xs":"\eb\'\ef\'\ei"
 EOF
 unset -v binding
 
