@@ -1,6 +1,6 @@
 ,forline () {
-    local f_usage="[-p] [file] [command]"
-    local f_info="Loops through each line(as \$line) in [file] or stdin (default) and executes [command] (defaults to echo \\\$line). Optionally in parallel(-p)"
+    local f_usage="[-p] [file] <command>"
+    local f_info="Loops through each line(as \$line) in [file] or stdin (default) and executes <command> (defaults to echo \\\$line). Optionally in parallel with [-p]"
 
     local parallel=0
     if [[ "$1" == "-p" ]]; then
