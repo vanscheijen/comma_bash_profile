@@ -2,7 +2,6 @@
     local f_usage="[-s] [from] [to] [file]"
     local f_info="Translates separators in [file] (default stdin '-') from [from] (default autodetection 'a') to [to] (default space ' '). Optionally: -s = strip surrounding seperators"
 
-
     local strip=0
     if [[ "$1" == "-s" ]]; then
         strip=1
@@ -11,8 +10,14 @@
 
     local from="${1:-a}"
     local to="${2:- }"
+    [[ "$to" == "a" ]] && to=" "
+    [[ "$to" == "n" || "$to" == "\n" ]] && to=$LF
     local content
-    [[ -s "$3" ]] || ,ifne || { ,,usage; return; }
+    if [[ "$3" ]]; then
+        [[ -s "$3" ]] || { ,error "'$3' is not a file"; return 65; }
+    else
+        ,ifne || { ,,usage; return; }
+    fi
     content=$(cat "${3:--}")
 
     [[ "${#from}" == 1 && "${#to}" == 1 && "${#content}" -gt 0 ]] || { ,,usage; return; }
