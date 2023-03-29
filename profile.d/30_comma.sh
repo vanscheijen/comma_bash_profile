@@ -11,6 +11,7 @@ alias ,git-history='git log --graph --decorate --abbrev-commit --date=short --pr
 alias ,git-pull-origin-master='git pull origin master'
 alias ,git-push-origin-head='git push -u origin `git symbolic-ref --short HEAD`'
 alias ,git-reset-hard='git reset --hard @{u}'
+alias ,git-reset-to-previous-version='git reset --soft HEAD~1'
 alias ,git-rebase-interactive='git rebase -i'
 alias ,git-restore='git checkout HEAD --'
 alias ,git-squash='git rebase -i origin/master'
@@ -27,6 +28,6 @@ alias ,whatismyip='ip r | grep ^default; dig +short myip.opendns.com @resolver1.
 
 # BEGIN EXCLUDE
 alias ,edit_profile='vim "$COMMA_PROFILEDIR"'
-alias ,moonphase='/usr/bin/curl https://wttr.in/Moon'
-alias ,weather='/usr/bin/curl https://wttr.in/Amersfoort; /usr/bin/curl https://wttr.in/Amersfoort?format=v2'
+alias ,moonphase='curl "https://wttr.in/Moon"'
+alias ,weather='curl "https://wttr.in/${COMMA_PROFILELOCATION}"; curl "https://wttr.in/${COMMA_PROFILELOCATION}?format=v2"'
 # END EXCLUDE
