@@ -28,6 +28,7 @@
 
     local logfile="$HOME/.ssh/logs/${host#*@}.log"
     touch "$logfile" &>/dev/null || logfile="/dev/null"
+    find "$HOME/.ssh" -mindepth 1 -maxdepth 1 -type p -name '*.pipe' -mtime +0 -delete
 
     if [[ "$host" =~ root@ ]]; then
         /usr/bin/ssh -t $params "$host" "$ssh_command" | tee -a "$logfile"
