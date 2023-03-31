@@ -4,6 +4,7 @@
     local host=""
     local ssh_command=""
     local params=""
+    local exitcode=0
 
     local args
     args=$(getopt 1246AaCfgKkMNnqsTtVvXxYb:c:D:e:F:i:L:l:m:O:o:p:R:S:w: $*)
@@ -30,6 +31,7 @@
 
     if [[ "$host" =~ root@ ]]; then
         /usr/bin/ssh -t $params "$host" "$ssh_command" | tee -a "$logfile"
+        exitcode=$PIPESTATUS
     else
         # Do not echo keyboard input to hide early password entry
         stty -echo
@@ -63,9 +65,12 @@
         local teepid=$!
         exec >"$pipefile" 2>&1
         /usr/bin/ssh -t $params "$host" "$ssh_command"
+        exitcode=$?
         exec 1>&3 3>&- 2>&4 4>&-
         wait $teepid &>/dev/null
         rm "$pipefile"
     fi
+
+    return $exitcode
 }
 
