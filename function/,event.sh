@@ -7,7 +7,7 @@
     local show_graphs=0
 
     local args
-    args=$(getopt :g $*)
+    args="$(getopt :g $*)"
     local argstop=0
     local arg
     for arg in $args; do

@@ -15,10 +15,11 @@
     local -i style="$2"
     local title="$3"
     local columns text stripped width
-    columns=$(stty size); columns="${columns##* }"
-    text=$(fmt --width=$columns <<< "$1")
-    stripped=$(printf "$text" | sed "s#\x1B\[[0-9;]*[a-zA-Z]##g")
-    width=$(awk 'length > m { m = length; a = $0 } END { print a }' <<< "ll${title}rr$LF$stripped")
+    columns="$(stty size)"
+    columns="${columns##* }"
+    text="$(fmt --width=$columns <<< "$1")"
+    stripped="$(printf "$text" | sed "s#\x1B\[[0-9;]*[a-zA-Z]##g")"
+    width="$(awk 'length > m { m = length; a = $0 } END { print a }' <<< "ll${title}rr$LF$stripped")"
 
     printf "${ulcorner[$style]}"
     local -i i

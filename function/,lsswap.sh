@@ -14,7 +14,7 @@
             ((swap_pid += swap))
         done
         if ((swap_pid > 0)); then
-            program_name=$(ps -p $pid -o comm --no-headers)
+            program_name="$(ps -p $pid -o comm --no-headers)"
             echo -e "$program_name (pid=$pid) - Swap usage: $swap_pid"
             ((swap_total += swap_pid))
         fi

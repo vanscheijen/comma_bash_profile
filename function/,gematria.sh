@@ -12,7 +12,7 @@
             ,lowercase | while read word; do
         value=0
         for ((i=0; i < ${#word}; i++)); do
-            value+=$(printf "%d-96" "'${word:i:1}")
+            value+="$(printf "%d-96" "'${word:i:1}")"
         done
         echo "$word = $value"
     done

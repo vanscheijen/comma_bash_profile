@@ -9,7 +9,7 @@
     local -r bc="-----BEGIN CERTIFICATE-----"
     local -r ec="-----END CERTIFICATE-----"
     local certs cert
-    certs=$(awk "/$bc/,/$ec/" "$1")
+    certs="$(awk "/$bc/,/$ec/" "$1")"
 
     local line
     while read -r line; do

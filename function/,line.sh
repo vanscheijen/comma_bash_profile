@@ -13,7 +13,7 @@
     fi
 
     local -i len
-    len=$(($(tput cols) / ${#style}))
+    len="$(($(tput cols) / ${#style}))"
     printf "%.s$style" $(seq 1 $len)
 }
 

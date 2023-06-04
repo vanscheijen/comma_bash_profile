@@ -17,7 +17,7 @@
 
     [[ "$DOM" ]] || { ,,usage; return; }
 
-    [[ "$NS" ]] || NS=$(dig "$DOM" SOA +short | awk '{print $1}')
+    [[ "$NS" ]] || NS="$(dig "$DOM" SOA +short | awk '{print $1}')"
 
     echo "$(dig "@$NS" "$DOM" "$TYPE" +dnssec +nocmd +noall +answer)"
     if [[ "$EXTENDED" ]]; then

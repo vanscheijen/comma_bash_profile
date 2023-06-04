@@ -6,15 +6,15 @@ ideas, and experiments.
 
 The main feature is that `ssh` is an alias to `,ssh` which will automatically
 copy .bash_profile to the target host. This ensures you always have the
-latests profile on your remote machine. Use the `s` command to become root
-via sudo or doas while retaining the profile.
+latests profile on your remote machine.
 
 ## Installation
 
 Install this git repo in ~/.local/share/comma_bash_profile:
 
 ```
-cd ~/.local/share/ && git clone http://github.com/vanscheijen/comma_bash_profile
+mkdir -p ~/.local/share/ && cd ~/.local/share/
+git clone http://github.com/vanscheijen/comma_bash_profile
 ```
 
 Backup and remove your old .bash_profile and .bashrc. Then redirect to the
@@ -33,7 +33,7 @@ source ~/.local/share/comma_bash_profile/function/,make_profile.sh
 ,make_profile
 ```
 
-All done! You should see a login prompt.
+All done! You should see the comma bash profile login prompt.
 
 ## Usage
 
@@ -42,20 +42,26 @@ run `,make_profile` to automatically check and activate.
 
 Type `,help` to get a list of all the comma functions.
 
-Use Ctrl-z to switch between background and foreground.
+You can use Ctrl-z to both put a job into the background and return it to the
+foreground. Some processes capture Ctrl-z, you can use Ctrl-q for those.
+
+Use the `s` command to become root via sudo or doas while retaining the profile.
 
 ## Notes
 
-* .bashrc should only be symlinked on your main workstation
-* ~/.profile and ~/.bash_login will be ignored (see bash man pages) unless sourced by .bashrc
 * Internal functions are prefixed with two comma's, e.g. `,,require` and are not for command line usage
 * The filenames in function/ and profile.d/ are arbitrary, the .sh suffix is just so vim understands the syntax
-
 * I prefer bash internals over externals, but for compatibility I minimize bash 4+ features
+
+* .bashrc is only used by non-login (sub)shells
+* ~/.profile and ~/.bash_login will be ignored (see bash man pages) unless sourced by .bashrc
+* I would not symlink .bashrc on remote machines
+* Symlink .bash_profile of the root user on your workstation to your home directory
+* Then also symlink .bashrc -> .bash_profile for root
 
 ## profile.d numbers
 
-All profile.d/9x_ and profile.d/x9_ files are excluded (see .gitignore), they are for (your|user) customization.
+All profile.d/9x_ and profile.d/x9_ files are excluded (see .gitignore), they are for your customization.
 
 This is just a guideline, only the order of execution is important:
 

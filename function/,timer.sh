@@ -7,13 +7,13 @@
     local tmpdir
     local -i alarmtime
     local -i now
-    now=$(,,now)
+    now="$(,,now)"
 
     # No given argument gives a list of current running timers
     if [[ -z "$time" ]]; then
         pgrep ",,timer_alarm" | while read timerpid; do
             tmpdir="${TMPDIR:-/tmp}/,timer.$timerpid"
-            alarmtime=$(< $tmpdir/alarmtime)
+            alarmtime="$(< $tmpdir/alarmtime)"
             ,info "In $((alarmtime - now)) seconds | Timer pid: $timerpid alarmtime: $alarmtime action: $(< $tmpdir/action)"
         done
         return
@@ -36,7 +36,7 @@
     time="${time//h/HOURS+}"
     time="${time//d/DAYS+}"
     time="+${time%%+}"
-    alarmtime=$(date -d "$time" +%s)
+    alarmtime="$(date -d "$time" +%s)"
     ((alarmtime - now > 4)) || { ,error "Why would you need to time such a short amount‽"; return 56; }
 
     # Set default action if not given
@@ -44,7 +44,7 @@
 
     # Backup process name and set new name for fork
     local procname
-    procname=$(< /proc/$$/comm)
+    procname="$(< /proc/$$/comm)"
     printf ",,timer_alarm" >| /proc/$$/comm
 
     # Start timer process in background
@@ -69,7 +69,7 @@
             until ((now > alarmtime)); do
                 (( (wait=(alarmtime - now) / 2) > 0 )) || wait="1"
                 sleep $wait
-                now=$(,,now)
+                now="$(,,now)"
             done
             ,,have espeak && espeak -a 200 "The timer has finished" &
             eval $action

@@ -7,7 +7,7 @@
     local -r spacelike="][ \.,;+=\t/\\(){}'\"\`"
 
     local oncewords
-    oncewords=$(
+    oncewords="$(
         tr "$spacelike" '\n' < "$1" |
             sed 's/[^-_a-zA-Z0-9]//g' |
                 ,lowercase |
@@ -16,7 +16,7 @@
                             grep "^ *1 ." |
                                 sed 's/^ *1 //' |
                                     tr '\n' '|'
-    )
+    )"
 
     [[ "$oncewords" ]] || ,debug "No unique words?!"
 

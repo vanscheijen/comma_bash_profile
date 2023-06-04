@@ -2,9 +2,10 @@
 
 # Bash sometimes struggles with $'\n' depending on the context
 readonly LF=$'\n'
+readonly HT=$'\t'
 
 # Comma profile vars
 COMMA_PROFILEDIR="$HOME/.local/share/comma_bash_profile"
-COMMA_VERSION="1.0.1"
+COMMA_VERSION="1.0.4"
 # %COMMA_DATE_GENERATED%
 

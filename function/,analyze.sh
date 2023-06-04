@@ -26,7 +26,7 @@ for c in range(0,255):
     print("%d %d %.6f" % (c, n, CS))
 EOF
     local tmpfile
-    tmpfile=$(mktemp)
+    tmpfile="$(mktemp)"
     python - "$1" <<< "$freqdist" | sort -n >| "$tmpfile"
 
     # TODO: Automatically-remove 0-byte when it peaks, this occurs in binaries and compressed formats somehow
@@ -68,7 +68,7 @@ print("%.6f %.6f" % (IC, SE))
 EOF
 
     local ao
-    ao=$(python - "$1" <<< "$edecoder")
+    ao="$(python - "$1" <<< "$edecoder")"
     local IC SE
     read IC SE <<< "$ao"
     ,info "Index of Coincidence"

@@ -4,7 +4,7 @@
 
     local month day birthday="$1"
     month="$(date -d $birthday +%m)"
-    day=$(date -d $birthday +%d)
+    day="$(date -d $birthday +%d)"
 
     case $month in
         01) ((day <= 19)) && echo "Capricorn" || echo "Aquarius" ;;

@@ -5,7 +5,7 @@
     [[ -d "$COMMA_PROFILEDIR" ]] || { ,,usage; return 61; }
 
     local tmpfile
-    tmpfile=$(mktemp)
+    tmpfile="$(mktemp)"
     local profile="$COMMA_PROFILEDIR/.bash_profile"
 
     # Generate profile

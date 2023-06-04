@@ -16,7 +16,7 @@
             local throw
             local color
             for ((d=1; d<=$dice; d++)); do
-                throw=$((RANDOM % faces + 1))
+                throw="$((RANDOM % faces + 1))"
                 color=""
                 ((total += throw))
                 [[ $throw -eq 1 ]] && color="$RED"
@@ -24,7 +24,7 @@
                 throws+="$color$throw$RESET + "
             done
             if [[ "$multiplier" ]]; then
-                subtotal=$((total = total * multiplier))
+                subtotal="$((total = total * multiplier))"
                 throws="${throws% + } * $multiplier + "
             fi
             if [[ "$addition" ]]; then

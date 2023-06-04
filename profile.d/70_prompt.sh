@@ -14,5 +14,6 @@ export PROMPT_COMMAND="history -a; stty echo"
 # end of title: \a
 # start of non-printable characters: \[
 # end of non-printable characters: \]
-export PS1="\[\e]0;\h (pts/\l #\#) \w\a\]\[${RESET}${WHITE}\]\t\[${XITALIC}${DIM}${DIMGRAY}\](\[${XDIM}\]j\[${BLUE}\]\j\[${DIMGRAY}\] x\$(EV=\$?; [[ \$EV == 0 ]] && printf \[${YELLOW}\]0 || printf \[${RED}\]\$EV;,,git_ps1_info \[ \])\[${RESET}${DIM}${DIMGRAY}\])\[${XDIM}${USER_COLOR}\]\u\[${RESET}${DIMGRAY}\]@\[${GRAY}\]\h\[\$([[ -w \$PWD ]] && printf $GREEN || printf $RED)\]:\[${WHITE}\]\w\[${GRAY}\]>\[${RESET}${CURSOR_SHOW}\] "
+export PS1="\[\e]0;\h (pts/\l #\#) \w\a\]\[${RESET}${WHITE}\]\t\[${XITALIC}${DIM}${DIMGRAY}\](\[${XDIM}\]j\[${BLUE}\]\j\[${DIMGRAY}\] x\$(EV=\$?; [[ \$EV == 0 ]] && printf \[${YELLOW}\]0 || printf \[${RED}\]\$EV;[[ \$SHLVL -gt 1 ]] && printf \[${DIMGRAY}\]\ s\[${CYAN}\]\$SHLVL;,,git_ps1_info \[ \])\[${RESET}${DIM}${DIMGRAY}\])\[${XDIM}${USER_COLOR}\]\u\[${RESET}${DIMGRAY}\]@\[${GRAY}\]\h\[\$([[ -w \$PWD ]] && printf $GREEN || printf $RED)\]:\[${WHITE}\]\w\[${GRAY}\]>\[${RESET}${CURSOR_SHOW}\] "
+export PS2="${RESET}${DIMGRAY}> ${RESET}"
 

@@ -5,7 +5,7 @@
     ,,require_bash4 || return
 
     local stderr
-    stderr=$(mktemp)
+    stderr="$(mktemp)"
     local exitcode=0
 
     # NOTE: The first character of the expanded value of PS4 is replicated multiple times, as necessary, to indicate multiple levels of indirection.
@@ -31,11 +31,11 @@
         return 59
     fi
     local last_timestamp
-    last_timestamp=$(,,now_nano)
+    last_timestamp="$(,,now_nano)"
 
     # Workaround to support multiline bash commands
     local tmpfile
-    tmpfile=$(mktemp)
+    tmpfile="$(mktemp)"
     tr '\n' '\r' < "$stderr" | sed 's/ *\v/\n/g' | tail -n +2 >| "$tmpfile"
     /bin/mv -f "$tmpfile" "$stderr"
 
@@ -56,7 +56,7 @@
         [[ "${#bash_function}" -gt ${longest_function_name:-0} ]] && longest_function_name=${#bash_function}
 
         # Encode source+function+lineno as associative array id
-        lineid=$(base64 <<< "$bash_source$SEP$bash_function$SEP$bash_line" | tr -d '\n')
+        lineid="$(base64 <<< "$bash_source$SEP$bash_function$SEP$bash_line" | tr -d '\n')"
 
         # Keep track of the order by which lines are execued
         [[ "${linecount["$lineid"]}" ]] || lineorder+=("$lineid")
@@ -64,7 +64,7 @@
 
         # The timestamp of PS4 is of the start of execution, so we can only know running time for each previous line
         if [[ "$prev_timestamp" ]]; then
-            linetime["$prev_lineid"]=$(bc -l <<< "${linetime["$prev_lineid"]:-0} + ($timestamp - $prev_timestamp)")
+            linetime["$prev_lineid"]="$(bc -l <<< "${linetime["$prev_lineid"]:-0} + ($timestamp - $prev_timestamp)")"
         else
             local first_timestamp="$timestamp"
         fi
@@ -79,19 +79,19 @@ ${parsed_command//$'\r'/ }"
     # cat "$stderr"
 
     # Calculate time for last command
-    linetime["$prev_lineid"]=$(bc -l <<< "${linetime["$prev_lineid"]:-0} + ($last_timestamp - $prev_timestamp)")
+    linetime["$prev_lineid"]="$(bc -l <<< "${linetime["$prev_lineid"]:-0} + ($last_timestamp - $prev_timestamp)")"
 
     local -r decimals=4 # for count and line number
     ,line
 
     for lineid in "${lineorder[@]}"; do
-        lineinfo=$(base64 -d <<< "$lineid")
+        lineinfo="$(base64 -d <<< "$lineid")"
         IFS="$SEP" read -r bash_source bash_function bash_line <<< "$lineinfo"
 
         if typeset -f "$bash_function" &>/dev/null; then
             bash_command="${linecommand["$lineid"]}"
         else
-            bash_command=$(sed -n "s/^[ \\t]*//;${bash_line}p;$((bash_line + 1))q" "$bash_source")
+            bash_command="$(sed -n "s/^[ \\t]*//;${bash_line}p;$((bash_line + 1))q" "$bash_source")"
         fi
 
         printf "%011.6f    (${CYAN}%${decimals}d${RESET}) %0${decimals}d | % ${longest_function_name}s | %s\n" "${linetime["$lineid"]}" "${linecount["$lineid"]}" "$bash_line" "$bash_function" "$bash_command"
