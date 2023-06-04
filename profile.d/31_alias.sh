@@ -28,6 +28,7 @@ fi
 ,,have resolvectl && alias host="resolvectl query"
 ,,have docker && alias ,dockerize_cwd="docker run -it --rm --entrypoint /bin/sh -v \$PWD:/workdir -w /workdir alpine"
 ,,have btop && alias top="btop"
+,,have units && alias units="units -t"
 
 # Use some rust alternatives if available. See https://zaiste.net/posts/shell-commands-rust/
 [[ -d "$HOME/.cargo/bin" ]] && grep -q "$HOME/.cargo/bin" <<< "$PATH" || export PATH="$HOME/.cargo/bin:$PATH"
