@@ -1,21 +1,26 @@
 ,decode () {
-    local f_usage="<string>"
-    local f_info="Decode string, detects binary|hexidecimal"
+    local f_usage="<string | file | stdin>"
+    local f_info="Decodes input automatically, detects binary|hexidecimal|base64"
 
-    # Idea list: Caesar cipher, Atbash cipher, Rail Fence cipher, Polybius square, Base64 encoding, Bacon's cipher, Morse code, Book cipher, Vigenère cipher
-    #  Playfair cipher, Autokey cipher, Beaufort cipher, Hill cipher, One-time pad, Transposition cipher, Substitution cipher, Columnar transposition cipher 
+    local data="$@"
+    [[ -s "$data" ]] && data="$(< "$data")" || data="$(,ifne cat)" || data="$@"
 
-    local string="$1"
-    if [[ "$string" =~ ^[01\ ]*$ ]]; then
-        local binstring="$string"
+    if [[ "$data" =~ ^[01\ ]+$ ]]; then
+        local bindata="${data// /}"
         while read -n8 -r byte; do
-            printf "\\$(echo "ibase=2; $byte" | bc)"
-        done <<< "$binstring"
-    elif [[ "$string" =~ ^[a-fA-F0-9\ ]*$ ]]; then
-        local hexstring="${string// /}"
-        for ((i = 0; i < ${#hexstring}; i += 2)); do
-            printf "%b" "\x${hexstring:$i:2}"
+            [[ "$byte" ]] || continue
+            printf "\\$(echo "obase=8; ibase=2; $byte" | bc)"
+        done <<< "$bindata"
+    elif [[ "$data" =~ ^[a-fA-F0-9x\ ]+$ ]]; then
+        local hexdata="${data// /}"
+        hexdata="${hexdata//0x/}"
+        for ((i = 0; i < ${#hexdata}; i += 2)); do
+            printf "%b" "\x${hexdata:$i:2}"
         done
+    elif [[ "$data" =~ ^[a-Z0-9+/\ \n]+={0,2}$ ]]; then
+        base64 -id <<< "$data"
+    else
+        ,warning "Could not detect encoding"
     fi
 }
 
