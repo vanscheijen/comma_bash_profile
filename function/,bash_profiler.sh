@@ -26,7 +26,7 @@
         ) 9>> "$stderr"
         exitcode=$?
     else
-        /bin/rm -f "$stderr"
+        rm -f "$stderr"
         ,error "Argument '$1' is neither a bash file nor function"
         return 59
     fi
@@ -37,7 +37,7 @@
     local tmpfile
     tmpfile="$(mktemp)"
     tr '\n' '\r' < "$stderr" | sed 's/ *\v/\n/g' | tail -n +2 >| "$tmpfile"
-    /bin/mv -f "$tmpfile" "$stderr"
+    mv -f "$tmpfile" "$stderr"
 
     local -r SEP=$'\f'
     local -A linetime
@@ -106,6 +106,6 @@ ${parsed_command//$'\r'/ }"
     total time\t: $(bc -l <<< "$last_timestamp - $first_timestamp")
     exited with\t: $exitcode"
 
-    /bin/rm -f "$stderr"
+    rm -f "$stderr"
 }
 

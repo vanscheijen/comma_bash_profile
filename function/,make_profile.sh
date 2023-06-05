@@ -35,7 +35,7 @@
     fi
 
     # Cleanup
-    /bin/rm -f "$tmpfile"
+    rm -f "$tmpfile"
     unset -f ,,test_profile
 
     # Run new profile

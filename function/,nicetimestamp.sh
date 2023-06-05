@@ -4,6 +4,6 @@
 
     ,,require perl || return
 
-    /bin/cat "${1:--}" | /usr/bin/perl -pe 's/(\d+)/localtime($1)/e'
+    cat "${1:--}" | perl -pe 's/(\d+)/localtime($1)/e'
 }
 
