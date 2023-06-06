@@ -1,4 +1,5 @@
 ,json_encode () {
+    local f_usage="<string | file | stdin>"
     local f_info="Encodes a normal string to a JSON string"
 
     ,,require python || return

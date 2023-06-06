@@ -9,7 +9,7 @@
     fi
 
     local data="$1"
-    [[ -s "$data" ]] && { data="$(< "$data")"; shift; } || data="$(,ifne cat)" || { ,,usage; return; }
+    [[ -s "$data" && ! -x "$data" ]] && { data="$(< "$data")"; shift; } || data="$(,ifne cat)" || { ,,usage; return; }
 
     [[ -n "$@" ]] || set 'echo "$line"'
     [[ "$@" =~ \$line ]] || set "$@" '"$line"'
