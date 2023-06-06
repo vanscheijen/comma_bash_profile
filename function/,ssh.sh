@@ -23,7 +23,7 @@
         fi
     done
 
-    [[ "$host" ]] || { /usr/bin/ssh $args; return $?; }
+    [[ "$host" ]] || { /usr/bin/ssh $args; return; }
     [[ "$ssh_command" ]] || ssh_command="exec /bin/bash -l"
 
     local logfile="$HOME/.ssh/logs/${host#*@}.log"

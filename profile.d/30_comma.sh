@@ -21,7 +21,7 @@ alias ,git-undo-commit='git reset --soft HEAD^'
 alias ,ld_library_path_cwd='LD_LIBRARY_PATH=.'
 alias ,ls_bind_mounts='findmnt | grep "\["'
 alias ,pwgen='echo $(tr -dc A-Za-z0-9 < /dev/urandom | head -c$(tput cols))'
-alias ,reset=',echo $RESET_SCREEN; stty sane'
+alias ,reset=',echo $ERASE_SCREEN; stty sane'
 alias ,rot13="tr 'A-Za-z0-9' 'N-ZA-Mn-za-m5-90-4'"
 alias ,rot47="tr '!-~' 'P-~!-O'"
 alias ,unhide="cat -t"

@@ -110,7 +110,7 @@ readonly ERASE_DISPLAY_BUFFER="\033[3J"
 readonly ERASE_LINE_END="\033[0K"
 readonly ERASE_LINE_BEGIN="\033[1K"
 readonly ERASE_LINE="\033[2K"
-readonly RESET_SCREEN="\033c"
+readonly ERASE_SCREEN="\033c"
 
 # Scroll display buffer
 readonly SCROLL_UP="\033[1S"
