@@ -20,6 +20,7 @@ alias ,git-submodule-update-remote-merge='git submodule update --remote --merge'
 alias ,git-undo-commit='git reset --soft HEAD^'
 alias ,ld_library_path_cwd='LD_LIBRARY_PATH=.'
 alias ,ls_bind_mounts='findmnt | grep "\["'
+alias ,notseen='awk "!seen[\$0]++"'
 alias ,pwgen='echo $(tr -dc A-Za-z0-9 < /dev/urandom | head -c$(tput cols))'
 alias ,reset=',echo $ERASE_SCREEN; stty sane'
 alias ,rot13="tr 'A-Za-z0-9' 'N-ZA-Mn-za-m5-90-4'"
