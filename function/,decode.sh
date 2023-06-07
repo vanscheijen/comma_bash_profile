@@ -14,7 +14,7 @@
     elif [[ "$data" =~ ^[a-fA-F0-9x\ ]+$ ]]; then
         local hexdata="${data// /}"
         hexdata="${hexdata//0x/}"
-        for ((i = 0; i < ${#hexdata}; i += 2)); do
+        for ((i=0; i < ${#hexdata}; i += 2)); do
             printf "%b" "\x${hexdata:$i:2}"
         done
     elif [[ "$data" =~ ^[a-Z0-9+/\ \n]+={0,2}$ ]]; then
