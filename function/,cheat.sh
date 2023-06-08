@@ -8,6 +8,10 @@
     mkdir -p "$cachedir"
 
     [[ -s "$cachedir/$@" ]] && { cat "$cachedir/$@"; return; }
+
+    [[ -s "$cachedir/:list" ]] ||  curl -sf "https://cheat.sh/:list" -o "$cachedir/:list"
+    grep -q "^$@$" "$cachedir/:list" || { ,warning "'$@' is unlisted, skipping query"; return; }
+
     curl -sf "https://cheat.sh/$@" -o "$cachedir/$@" && cat "$cachedir/$@" || ,error "Failed retrieving cheat.sh/$@"
 }
 
