@@ -3,6 +3,7 @@
     local f_info="Fills the entire row with <text> or a special 'gray' line"
 
     local style="${1:-=}"
+    local -i i len
 
     if [[ "$style" == "gray" ]]; then
         for i in {232..255} {254..232}; do
@@ -12,7 +13,6 @@
         return
     fi
 
-    local -i len
     len="$(($(tput cols) / ${#style}))"
     printf "%.s$style" $(seq 1 $len)
 }

@@ -23,7 +23,7 @@
 
     printf "${ulcorner[$style]}"
     local -i i
-    for ((i=0; i < ${#width}; i++)); do
+    for ((i=0; i<${#width}; i++)); do
         printf "${horizontal[$style]}"
     done
     printf "${urcorner[$style]}"
@@ -33,7 +33,7 @@
         ,echo "${vertical[$style]}${line}$(CURSOR_HORIZONTAL $((${#width} + 2)))${vertical[$style]}"
     done <<< "$text"
     printf "${dlcorner[$style]}"
-    for ((i=0; i < ${#width}; i++)); do
+    for ((i=0; i<${#width}; i++)); do
         printf "${horizontal[$style]}"
     done
     echo "${drcorner[$style]}"

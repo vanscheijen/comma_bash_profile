@@ -8,7 +8,7 @@
     local warning="$YELLOW"
     local error="$RED"
 
-    ,echo "${DIMGRAY}[${!level}$(,uppercase $level)${DIMGRAY}]${RESET} $@"
+    ,echo "${DIMGRAY}[${!level}$(,uppercase $level)${DIMGRAY}]${RESET} $@" 1>&2
 }
 
 # Generate logging functions for all loglevels
