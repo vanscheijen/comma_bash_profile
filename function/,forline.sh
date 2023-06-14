@@ -26,6 +26,7 @@
         fi
     }
 
+    set +m
     local line lineno=0
     while IFS= read -r line; do
         ((lineno++))
@@ -34,7 +35,7 @@
             ((proc++))
             fd=$((100 + proc))
             eval "exec $fd<> $tmpdir/$(printf "%04d" $proc)"
-            eval "$@ >&$fd 2>&1" &
+            { eval "$@ >&$fd 2>&1" & } 2>/dev/null
             eval "exec $fd>&-"
         else
             eval "$@"
@@ -46,5 +47,6 @@
         ,,parallel_output
         rm -rf "$tmpdir"
     fi
+    set -m
 }
 
