@@ -3,7 +3,7 @@
     local f_info="Decodes input automatically, detects binary|hexidecimal|base64|morse"
 
     local data="$@"
-    [[ -s "$data" ]] && data="$(< "$data")" || data="$(,ifne cat)" || data="$@"
+    [[ -s "$data" ]] && data="$(< "$data")" || [[ "$data" ]] || data="$(,ifne cat)" || { ,,usage; return; }
 
     local ddata
     if [[ "$data" =~ ^[01\ $LF]+$ ]]; then

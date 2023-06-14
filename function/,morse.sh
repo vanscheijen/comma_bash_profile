@@ -1,6 +1,6 @@
 ,morse () {
-    local f_usage="[frequency] <string | file | stdin>"
-    local f_info="Output morse encoded text with optional audio beeps of [frequency] hertz (default 0 which means no audio)"
+    local f_usage="[frequency] [wpm] <string | file | stdin>"
+    local f_info="Output morse encoded text with optional audio beeps of [frequency] hertz (default 0 which means no audio) at [wpm] words per minute (default 60)"
 
     ,,require_bash4 || return
 
@@ -94,14 +94,17 @@
         [Ż]='--..-'
     )
 
-    local -i i j frequency=0
+    local -i i j frequency=0 wpm=60
     if [[ "$1" =~ ^[0-9]+$ && "$1" -ge 0 && "$1" -lt 24000 ]]; then
         frequency=$1
         shift
     fi
+    if [[ "$1" =~ ^[0-9]+$ && "$1" -ge 0 && "$1" -lt 500 ]]; then
+        wpm=$1
+        shift
+    fi
     local data="$@"
-    [[ -s "$data" ]] && data="$(< "$data")" || data="$(,ifne cat)" || data="$@"
-    [[ "$data" ]] || { ,,usage; return; }
+    [[ -s "$data" ]] && data="$(< "$data")" || [[ "$data" ]] || data="$(,ifne cat)" || { ,,usage; return; }
 
     local char code morse=""
     for ((i=0; i<${#data}; i++)); do
@@ -116,7 +119,7 @@
             done
             morse+="  "
         else
-            ,warning "Cannot convert '$char' into morse"
+            ,warning "Cannot convert $RED$(,unhide <<< "$char")$RESET into morse"
         fi
     done
     echo "$morse"
@@ -124,8 +127,9 @@
     ((frequency == 0)) && return
     ,,require sox || return
 
-    local -r duration_dit=0.05
-    local -r duration_dah=0.15
+    local duration_dit duration_dah
+    duration_dit=$(bc <<< "scale=2; 12 / $wpm")
+    duration_dah=$(bc <<< "scale=2; $duration_dit * 3")
     local -r ditfile="${TMPDIR:-/tmp}/,morse_dit.wav"
     local -r dahfile="${TMPDIR:-/tmp}/,morse_dah.wav"
     local -r spacefile="${TMPDIR:-/tmp}/,morse_space.wav"

@@ -1,5 +1,5 @@
 ,sep2sep () {
-    local f_usage="[-s] [from] [to] [string | file | stdin]"
+    local f_usage="[-s] [from] [to] <string | file | stdin>"
     local f_info="Translates separators in input from [from] (default autodetection 'a') to [to] (default space ' '). Optionally: -s = strip surrounding seperators"
 
     local sss=0
@@ -13,7 +13,7 @@
     [[ "$to" == "a" || "$to" == "s" ]] && to=" "
     [[ "$to" == "n" || "$to" == "\n" ]] && to=$LF
     local data="${@:3}"
-    [[ -s "$data" ]] && data="$(< "$data")" || data="$(,ifne cat)" || data="${@:3}"
+    [[ -s "$data"  ]] && data="$(< "$data")" || [[ "$data"  ]] || data="$(,ifne cat)" || { ,,usage; return; }
 
     [[ "${#from}" == 1 && "${#to}" == 1 && "${#data}" -gt 0 ]] || { ,,usage; return; }
 
