@@ -129,7 +129,7 @@
         for word in $ddata; do
             IFS="L"
             for letter in $word; do
-                if [[ -v cw[$letter] ]]; then
+                if [[ "${cw[$letter]}" ]]; then
                     data+="${cw[$letter]}"
                 else
                     ,warning "Morse code letter '$letter' is unknown"

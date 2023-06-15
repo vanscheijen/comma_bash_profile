@@ -112,7 +112,7 @@
         char="${char^^}"
         if [[ "$char" == " " ]]; then
             morse+="    "
-        elif [[ -v cw[$char] ]]; then
+        elif [[ "${cw[$char]}" ]]; then
             code="${cw[$char]}"
             for ((j=0; j<${#code}; j++)); do
                 morse+="${code:$j:1} "
