@@ -61,7 +61,7 @@ done <<EOF
 "\C-k":kill-line
 "\eb":backward-word
 "\ef":forward-word
-"\C-w":backward-kill-word
+"\C-w":unix-word-rubout
 "\ew":kill-word
 "\em":"\e0wdbi"
 "\e[A":history-search-backward

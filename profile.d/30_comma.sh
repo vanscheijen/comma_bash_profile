@@ -3,6 +3,7 @@ alias cssh=',cssh'
 alias ssh=',ssh'
 
 # Comma aliases (some might become functions)
+alias ,activate="source .env/bin/activate"
 alias ,common='comm -12'
 alias ,diskusage='du -sm $(for i in /*; do grep -q "^[^ ]* $i " /proc/mounts || echo $i; done) | sort -n'
 alias ,git-commit-all='git commit -a'

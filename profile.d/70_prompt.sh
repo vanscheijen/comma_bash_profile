@@ -3,8 +3,8 @@
 USER_COLOR="${DIM}${DIMCYAN}"
 [[ "$EUID" == "0" ]] && USER_COLOR="$RED"
 
-# Update history and re-enable output with each command
-export PROMPT_COMMAND="history -a; stty echo"
+# Update history, re-enable output, and show fake-newline if not present
+export PROMPT_COMMAND="history -a; stty echo; pos=\$(CURSOR_GET 2>/dev/null); [[ \${pos#* } -gt 1 ]] && printf \${RED}\${CURSOR_NEXTLINE}"
 
 # Update previous timestamp into italic
 # NOTE: Disabled until I find a better way to handle multiline input
