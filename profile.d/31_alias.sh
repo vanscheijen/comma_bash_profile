@@ -71,7 +71,7 @@ if ,,have kitty; then
     source <(kitty + complete setup bash)
     alias kitty-diff="kitty +kitten diff"
     alias icat="kitty +kitten icat"
-elif [[ ! -f ~/.terminfo/x/xterm-kitty ]]; then
+elif [[ "$TERM" == "xterm-kitty" ]]; then
     export TERM=xterm-256color
 fi
 

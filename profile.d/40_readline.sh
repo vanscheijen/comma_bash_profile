@@ -11,7 +11,7 @@ bind 'RETURN: "\e\n"'
 #bind "set vi-cmd-mode-string \1${CURSOR_STYLE_BLOCK}$(TERMRGBCOLOR 113355)\2"
 
 # Readline customizations
-bind 'set bell-style visible'
+bind 'set bell-style audible'
 bind 'set blink-matching-paren on'
 bind 'set colored-completion-prefix on'
 bind 'set colored-stats on'
