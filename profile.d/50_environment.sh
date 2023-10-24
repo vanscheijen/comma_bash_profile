@@ -42,6 +42,8 @@ ulimit -S -c 0
 shopt -u mailwarn
 unset MAILCHECK
 
+[[ "$SHELL" =~ bash ]] || export SHELL=/bin/bash
+
 # Use less alias as pager
 export PAGER="less"
 

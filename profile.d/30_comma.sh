@@ -3,9 +3,10 @@ alias cssh=',cssh'
 alias ssh=',ssh'
 
 # Comma aliases (some might become functions)
-alias ,activate="source .env/bin/activate"
+alias ,activate="source .*env/bin/activate"
 alias ,common='comm -12'
 alias ,diskusage='du -sm $(for i in /*; do grep -q "^[^ ]* $i " /proc/mounts || echo $i; done) | sort -n'
+alias ,git-checkout-master='git checkout master; git pull'
 alias ,git-commit-all='git commit -a'
 alias ,git-diff-last='git diff HEAD^ HEAD'
 alias ,git-history='git log --graph --decorate --abbrev-commit --date=short --pretty=format:"%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(red)%s %C(bold red){{%an}}%C(reset) %C(blue)%d%C(reset)"'

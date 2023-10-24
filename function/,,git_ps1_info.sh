@@ -1,4 +1,8 @@
 ,,git_ps1_info () {
+    [[ -d .git ]] || return
+    ,,have git || return
+    local git_eng="env LANG=C git"
+
     # \[ and \] are passed as $1 and $2, so we can escape non-printables
     # Theoretically we could also use ${SYMBOL_GIT_BRANCH@P} to simply use \[ and \]
     local SYMBOL_GIT_BRANCH="${1}${PURPLE}${2}${1}${CYAN}${2}"
@@ -6,9 +10,6 @@
     local SYMBOL_GIT_MODIFIED="${1}${RED}${2}*${1}${CYAN}${2}"
     local SYMBOL_GIT_PUSH="${1}${BLUE}${2}↑${1}${CYAN}${2}"
     local SYMBOL_GIT_PULL="${1}${GREEN}${2}↓${1}${CYAN}${2}"
-
-    ,,have git || return
-    local git_eng="env LANG=C git"
 
     # get current branch name
     local ref tag

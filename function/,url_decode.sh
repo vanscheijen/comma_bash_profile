@@ -1,7 +1,11 @@
 ,url_decode () {
+    local f_usage="<string | file | stdin>"
     local f_info="Decodes an URL encoded string to a normal string"
 
-    local url_encoded="${1//+/ }"
-    printf "%b" "${url_encoded//%/\\x}"
+    local data="$@"
+    [[ -s "$data" ]] && data="$(< "$data")" || [[ "$data" ]] || data="$(,ifne cat)" || { ,,usage; return; }
+
+    data="${data//+/ }"
+    printf "%b" "${data//%/\\x}\n"
 }
 

@@ -1,6 +1,8 @@
 # Generic aliases
 alias less="less -IMRn"
 alias p="ps faux"
+alias tmesg='dmesg|perl -ne "BEGIN{\$a= time()- qx!cat /proc/uptime!};s/\[\s*(\d+)\.\d+\]/localtime(\$1 + \$a)/e; print \$_;"'
+alias mc="mc -u"
 
 # Version dependent aliases
 if diff --color=always -d --version &>/dev/null; then
@@ -71,6 +73,7 @@ if ,,have kitty; then
     source <(kitty + complete setup bash)
     alias kitty-diff="kitty +kitten diff"
     alias icat="kitty +kitten icat"
+    alias kitty-grep="kitty +kitten hyperlinked_grep"
 elif [[ "$TERM" == "xterm-kitty" ]]; then
     export TERM=xterm-256color
 fi

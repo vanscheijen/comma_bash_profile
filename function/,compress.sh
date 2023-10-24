@@ -2,7 +2,7 @@
     local f_usage="<archive> <file ...>"
     local f_info="Automatically compress <file ...> into <archive> (7z|xz|bz2|gz|zip)"
 
-    [[ "$1" ]] || { ,,usage; return; }
+    [[ "$1" && "$2" ]] || { ,,usage; return; }
 
     local method
     [[ "$1" =~ \.xz$ ]] && method=xz
@@ -17,7 +17,7 @@
     fi
 
     if [[ -z $method ]] && ,,have 7z; then
-        7z a -r -snh -snl -stl -y -- "$@"
+        7z a -r -snh -snl -stl -y -- "${@/%\//\/.}"
     elif [[ $method == xz ]] || [[ -z $method ]] && ,,have xz; then
         tar -cJvpaf "$@"
     elif [[ $method == bz ]] || [[ -z $method ]] && ,,have bzip2; then

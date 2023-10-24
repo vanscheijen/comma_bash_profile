@@ -13,7 +13,7 @@
     [[ "$to" == "a" || "$to" == "s" ]] && to=" "
     [[ "$to" == "n" || "$to" == "\n" ]] && to=$LF
     local data="${@:3}"
-    [[ -s "$data"  ]] && data="$(< "$data")" || [[ "$data"  ]] || data="$(,ifne cat)" || { ,,usage; return; }
+    [[ -s "$data" ]] && data="$(< "$data")" || [[ "$data" ]] || data="$(,ifne cat)" || { ,,usage; return; }
 
     [[ "${#from}" == 1 && "${#to}" == 1 && "${#data}" -gt 0 ]] || { ,,usage; return; }
 
@@ -28,7 +28,7 @@
     fi
 
     if [[ "$sss" == 1 ]]; then
-        tr "$from" "$to" <<< "$data" | sed "s/^[${to@Q}]*//;s/[${to@Q}]*$//"
+        tr "$from" "$to" <<< "$data" | sed "s/^${to/$LF/\n}*//;s/${to/$LF/\n}*$//"
     else
         tr "$from" "$to" <<< "$data"
     fi

@@ -14,7 +14,7 @@ readonly CROSSED="\033[9m"
 
 # Remove graphical renditions
 readonly XRESET="\033[20m"
-readonly XBOLD="\033[21m" # double underline in kitty (bug?)
+readonly XBOLD="\033[21m" # Double-underline per ECMA-48
 readonly XDIM="\033[22m"
 readonly XITALIC="\033[23m"
 readonly XUNDERLINE="\033[24m"
@@ -120,7 +120,7 @@ readonly SCROLL_DOWN="\033[1T"
 VGACOLOR () { [[ $1 -ge 0 && $1 -lt 256 ]] && printf "\033[38;5;$1m"; }
 
 # 24 bit color support
-# Usage: (BG|TERM)RGBCOLOR <24 bit hex color code>
+# Usage: (BG|TERM|U)RGBCOLOR <24 bit hex color code>
 RGBCOLOR () {
     [[ "$1" =~ ^[0-9a-fA-F]{6}$ ]] && printf "\033[38;2;$((16#${1:0:2}));$((16#${1:2:2}));$((16#${1:4:2}))m"
 }
@@ -128,6 +128,9 @@ BGRGBCOLOR () {
     [[ "$1" =~ ^[0-9a-fA-F]{6}$ ]] && printf "\033[48;2;$((16#${1:0:2}));$((16#${1:2:2}));$((16#${1:4:2}))m"
 }
 TERMRGBCOLOR () { printf "\e]11;#$1\a"; }
+URGBCOLOR () {
+    [[ "$1" =~ ^[0-9a-fA-F]{6}$ ]] && printf "\033[58;2;$((16#${1:0:2}));$((16#${1:2:2}));$((16#${1:4:2}))m"
+}
 
 # For terminals with hyperlink support
 # Usage: <link> <text>
