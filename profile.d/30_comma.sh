@@ -34,5 +34,5 @@ alias ,whatismyip='ip r | grep ^default; dig +short myip.opendns.com @resolver1.
 # BEGIN EXCLUDE
 alias ,edit_profile='vim "$COMMA_PROFILEDIR"'
 alias ,moonphase='curl "https://wttr.in/Moon"'
-alias ,weather='curl "https://wttr.in/${COMMA_PROFILELOCATION}"; curl "https://wttr.in/${COMMA_PROFILELOCATION}?format=v2"'
+alias ,weather='curl "https://wttr.in/${COMMA_WEATHER_LOCATION}"; curl "https://wttr.in/${COMMA_WEATHER_LOCATION}?format=v2"'
 # END EXCLUDE
