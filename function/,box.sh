@@ -1,6 +1,6 @@
 ,box () {
-    local f_usage="<text> [box style (0/1/2)] [title]"
-    local f_info="Prints <text> within a ascii box. Box style can be 1 for thin-, 2 for thick-, or 3 for double-lined"
+    local f_usage="<text> [-s style] [-t title] [-c color] [-center] [-full] [-w widht] [-h height] [-x column] [-y line]"
+    local f_info="Prints <text> within an box with optional <title>. Box style can be 0 for thin-, 1 for thick-, or 2 for double-lined"
 
     # Styles               0   1   2
     local -a ulcorner=(   "╭" "┏" "╔" )
@@ -12,30 +12,55 @@
     local -a leftot=(     "┤" "┥" "╡" )
     local -a rightot=(    "├" "┝" "╞" )
 
-    local -i style="$2"
-    local title="$3"
-    local columns text stripped width
-    columns="$(stty size)"
-    columns="${columns##* }"
-    text="$(fmt --width=$columns <<< "$1")"
-    stripped="$(printf "$text" | sed "s#\x1B\[[0-9;]*[a-zA-Z]##g")"
-    width="$(awk 'length > m { m = length; a = $0 } END { print a }' <<< "ll${title}rr$LF$stripped")"
+    local text style title color stripped line
+    local -i x=0 y=1 height=0 width=0 columns full=0 center=0 i j
+    columns="$(,,columns)"
 
-    printf "${ulcorner[$style]}"
-    local -i i
-    for ((i=0; i<${#width}; i++)); do
+    until (($#==0)); do
+        case $1 in
+            -f|-full) full=1;;
+            -m|-center) center=1;;
+            -x|-column) x="$2"; shift;;
+            -y|-line) y="$2"; shift;;
+            -w|-width) width="$2"; shift;;
+            -h|-height) height="$2"; shift;;
+            -t|-title) title="$2"; shift;;
+            -s|-style) style="$2"; shift;;
+            -c|-color) color="$2"; shift;;
+            -v|-variable) local -n output=$2; shift;; # TODO: Actually output to $output and printf that
+            *) text+="$1" ;;
+        esac
+        shift
+    done
+
+    text="$(fmt --width=$columns <<< "$text")"
+    stripped="$(printf "$text" | sed "s#\x1B\[[0-9;]*[a-zA-Z]##g")"
+    if [[ $width -eq 0 ]]; then
+        width="$(awk 'length > max { max = length } END { print max }' <<< "ll${title}rr$LF$stripped")"
+        [[ "$full" == 1 || $width -gt $((columns - 2)) ]] && width=$((columns - 2))
+    fi
+    [[ $center == 1 ]] && y=$(((columns - width) / 2))
+
+    [[ $x -gt 0 ]] && printf "$(CURSOR_POSITION $x $y)"
+    printf "$(CURSOR_HORIZONTAL $y)${color}${ulcorner[$style]}"
+    for ((i=0; i<width; i++)); do
         printf "${horizontal[$style]}"
     done
     printf "${urcorner[$style]}"
-    [[ "$title" ]] && printf "$(CURSOR_HORIZONTAL 3)${leftot[$style]}${title}${rightot[$style]}\n" || printf "\n"
-    local line
+    [[ "$title" ]] && printf "$(CURSOR_HORIZONTAL $((y + 2)))${leftot[$style]}${title}${color}${rightot[$style]}\n" || printf "\n"
     while read -r line; do
-        ,echo "${vertical[$style]}${line}$(CURSOR_HORIZONTAL $((${#width} + 2)))${vertical[$style]}"
+        ,echo "$(CURSOR_HORIZONTAL $y)${color}${vertical[$style]}${line}$(CURSOR_HORIZONTAL $((y + width + 1)))${vertical[$style]}"
+        ((j++))
     done <<< "$text"
-    printf "${dlcorner[$style]}"
-    for ((i=0; i<${#width}; i++)); do
+    if [[ $height -gt 0 ]]; then
+        for ((i=j; i<height; i++)); do
+            ,echo "$(CURSOR_HORIZONTAL $y)${color}${vertical[$style]}$(CURSOR_HORIZONTAL $((y + width + 1)))${vertical[$style]}"
+        done
+    fi
+    printf "$(CURSOR_HORIZONTAL $y)${color}${dlcorner[$style]}"
+    for ((i=0; i<width; i++)); do
         printf "${horizontal[$style]}"
     done
-    echo "${drcorner[$style]}"
+    printf "${drcorner[$style]}\n"
 }
 

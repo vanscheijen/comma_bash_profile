@@ -1,4 +1,4 @@
-,,git_ps1_info () {
+,,ps1_git_info () {
     [[ -d .git ]] || return
     ,,have git || return
     local git_eng="env LANG=C git"

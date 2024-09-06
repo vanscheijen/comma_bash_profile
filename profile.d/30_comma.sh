@@ -9,7 +9,7 @@ alias ,diskusage='du -sm $(for i in /*; do grep -q "^[^ ]* $i " /proc/mounts || 
 alias ,git-checkout-master='git checkout master; git pull'
 alias ,git-commit-all='git commit -a'
 alias ,git-diff-last='git diff HEAD^ HEAD'
-alias ,git-history='git log --graph --decorate --abbrev-commit --date=short --pretty=format:"%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(red)%s %C(bold red){{%an}}%C(reset) %C(blue)%d%C(reset)"'
+alias ,git-history='git log --color --graph --decorate --pretty=format:"%C(auto,yellow)%h%C(auto,magenta)% G? %Cred%ad %C(auto,green)%<(20,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D"'
 alias ,git-pull-origin-master='git pull origin master'
 alias ,git-push-origin-head='git push -u origin `git symbolic-ref --short HEAD`'
 alias ,git-reset-hard='git reset --hard @{u}'
@@ -23,7 +23,7 @@ alias ,git-undo-commit='git reset --soft HEAD^'
 alias ,ld_library_path_cwd='LD_LIBRARY_PATH=.'
 alias ,ls_bind_mounts='findmnt | grep "\["'
 alias ,notseen='awk "!seen[\$0]++"'
-alias ,pwgen='echo $(tr -dc A-Za-z0-9 < /dev/urandom | head -c$(tput cols))'
+alias ,pwgen='echo $(tr -dc A-Za-z0-9 < /dev/urandom | head -c$(,,columns))'
 alias ,reset=',echo $ERASE_SCREEN; stty sane'
 alias ,rot13="tr 'A-Za-z0-9' 'N-ZA-Mn-za-m5-90-4'"
 alias ,rot47="tr '!-~' 'P-~!-O'"

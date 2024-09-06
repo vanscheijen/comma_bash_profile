@@ -3,6 +3,8 @@
     local f_info="Roll dice in standard RPG dice notation format"
     local f_example=",dice 2d8*3+6 # roll three dices with 8 faces, multiply by 3, and add 6"
 
+    [[ "$1" ]] || { ,,usage; return; }
+
     local arg
     for arg; do
         if [[ "$arg" =~ ^([1-9][0-9]*)?[dD]([1-9][0-9]*)(\*[1-9][0-9]*)?(\+[1-9][0-9]*)?$ ]]; then

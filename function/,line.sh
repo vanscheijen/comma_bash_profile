@@ -13,7 +13,7 @@
         return
     fi
 
-    len="$(($(tput cols) / ${#style}))"
+    len="$(($(,,columns) / ${#style}))"
     printf "%.s$style" $(seq 1 $len)
 }
 

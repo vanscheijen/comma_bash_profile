@@ -95,11 +95,11 @@
     )
 
     local -i i j frequency=0 wpm=60
-    if [[ "$1" =~ ^[0-9]+$ && "$1" -ge 0 && "$1" -lt 24000 ]]; then
+    if ,,isint "$1" && [[ "$1" -ge 0 && "$1" -lt 24000 ]]; then
         frequency=$1
         shift
     fi
-    if [[ "$1" =~ ^[0-9]+$ && "$1" -ge 0 && "$1" -lt 500 ]]; then
+    if ,,isint "$1" && [[ "$1" -ge 0 && "$1" -lt 500 ]]; then
         wpm=$1
         shift
     fi

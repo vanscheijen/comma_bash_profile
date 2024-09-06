@@ -29,7 +29,7 @@
     fi
 
     # Parse given time or present usage if no valid arguments were given
-    [[ "$time" =~ ^[0-9]+$ ]] && time="${time}s"
+    ,,isint "$time" && time="${time}s"
     [[ "$time" =~ ^[0-9smhd\ ]+$ ]] || { ,,usage; return; }
     time="${time//s/SECONDS+}"
     time="${time//m/MINUTES+}"

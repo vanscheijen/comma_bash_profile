@@ -1,12 +1,12 @@
 ,datediff () {
     local f_usage="<from date> [to date] [options]"
     local f_info="Outputs the difference between two dates. Optionally disable(-) or enable(+) (y)ears (w)eeks (d)ays (h)ours (m)inutes (s)econds, (q)uietly or (i)so8601"
-    local f_example=",datediff now tomorrow +ih;,datediff '-10 days 08:00' '25 dec' -q"
+    local f_example=",datediff now tomorrow +ih; ,datediff '-10 days 08:00' '25 dec' -q"
 
     local fromdate
-    fromdate="$(date -d "$1" +%s 2>/dev/null)"
+    fromdate="$(date -d "${1:-invalid}" +%s 2>/dev/null)"
     local todate
-    todate="$(date -d "$2" +%s 2>/dev/null)"
+    todate="$(date -d "${2:-now}" +%s 2>/dev/null)"
     [[ "$fromdate" && "$todate" ]] || { ,,usage; return; }
     local y=1 w=1 d=1 h=1 m=1 s=1 q=0 i=0
     [[ "$3" =~ \+ ]] && y=0 w=0 d=0 h=0 m=0 s=0
