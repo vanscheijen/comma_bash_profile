@@ -57,7 +57,7 @@ bind Space:magic-space
 
 # root user
 if [[ "$EUID" == "0" ]]; then
-    export TMOUT=3600 # logout after hour of inactivity
+    export TMOUT=172800 # logout after 2 days of inactivity
     export HOME=/root
     export LOGNAME=root
     export USER=root
