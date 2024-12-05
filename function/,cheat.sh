@@ -15,3 +15,9 @@
     curl -sf "https://cheat.sh/$@" -o "$cachedir/$@" && cat "$cachedir/$@" || ,error "Failed retrieving cheat.sh/$@"
 }
 
+,,complete_cheat () {
+    COMPREPLY=( $(compgen -W "$(cat ${TMPDIR:-/tmp}/,cheat/:list)" -- "$2") )
+}
+
+complete -o nospace -F ,,complete_cheat ,cheat
+

@@ -27,3 +27,9 @@
     done
 }
 
+,,complete_help () {
+    COMPREPLY=( $(compgen -W "$(typeset -f | sed -rn "/^,[^,].* ()$/ s/,(.*) \(\)/,\1\n\1/p"; alias -p | sed -rn '/^alias ,[^,]/ s/alias ,([^=]*)=.*/,\1\n\1/p')" -- "$2") )
+}
+
+complete -o nospace -F ,,complete_help ,help
+
