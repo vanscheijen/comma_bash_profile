@@ -34,7 +34,7 @@
     done
 
     text="$(fmt --width=$columns <<< "$text")"
-    stripped="$(printf "$text" | sed "s#\x1B\[[0-9;]*[a-zA-Z]##g")"
+    stripped="$(printf "$text" | ,noansi)"
     if [[ $width -eq 0 ]]; then
         width="$(awk 'length > max { max = length } END { print max }' <<< "ll${title}rr$LF$stripped")"
         [[ "$full" == 1 || $width -gt $((columns - 2)) ]] && width=$((columns - 2))
