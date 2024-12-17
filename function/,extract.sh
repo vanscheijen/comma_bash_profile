@@ -23,15 +23,20 @@
     [[ "$tool" ]] || { ,error "'$1' has an unknown compression format"; return 62; }
     ,info "Using $tool to extract '$1'"
     local origdir="$PWD"
-    local tmpdir
-    tmpdir="$(mktemp -d -p "$PWD")"
+    local tmpdir newname dircount filecount
+    tmpdir="$(mktemp -d -p "$origdir")"
     cd "$tmpdir" && $tool "$origdir/$1"
     cd "$origdir"
-    if [[ $(\ls -d1q "$tmpdir/" | wc -l) -eq 1 && $(\ls -1q "$tmpdir/" | wc -l) -eq 1 ]]; then
+    dircount=$(\ls -d1q "$tmpdir/" | wc -l)
+    filecount=$(\ls -1q "$tmpdir/" | wc -l)
+    if [[ $dircount -eq 1 && $filecount -eq 1 ]]; then
         mv -i "$tmpdir/"* "$origdir/"
         rmdir "$tmpdir"
+    elif [[ $filecount -eq 0 ]]; then
+        rmdir "$tmpdir"
     else
-        local newname="${1%%.*}"
+        newname="${1%.*}"
+        newname="${1%.*}"
         [[ -e "$newname" ]] && newname="${newname}-extract"
         mv "$tmpdir" "$newname"
     fi
