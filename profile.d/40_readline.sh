@@ -1,7 +1,7 @@
 # vi-like bash
 set -o vi
 bind 'set show-mode-in-prompt on'
-bind "set vi-ins-mode-string \1${CURSOR_STYLE_HLINE}\2"
+bind "set vi-ins-mode-string \1${CURSOR_STYLE_HLINE}${DIMPURPLE}\2,"
 bind "set vi-cmd-mode-string \1${CURSOR_STYLE_BLOCK}\2"
 # switch to normal mode before executing a command (literaly presses escape before enter)
 bind 'RETURN: "\e\n"'
@@ -66,6 +66,8 @@ done <<EOF
 "\em":"\e0wdbi"
 "\e[A":history-search-backward
 "\e[B":history-search-forward
+"\C-xx":"\"\"\eji"
+"\C-xc":"\'\'\eji"
 "\C-xq":"\eb\"\ef\"\ei"
 "\C-xs":"\eb\'\ef\'\ei"
 EOF
