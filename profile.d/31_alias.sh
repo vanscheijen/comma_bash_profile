@@ -29,7 +29,7 @@ fi
 ,,have qrencode && alias ,qr="qrencode -lL -t UTF8i -o -"
 ,,have resolvectl && alias host="resolvectl query"
 ,,have docker && alias ,dockerize_cwd="docker run -it --rm --entrypoint /bin/sh -v \$PWD:/workdir -w /workdir alpine"
-,,have btop && alias top="btop"
+,,have btop && alias top="btop --utf-force"
 ,,have units && alias units="units -t"
 
 # Use some rust alternatives if available. See https://zaiste.net/posts/shell-commands-rust/
