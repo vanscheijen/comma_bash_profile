@@ -14,9 +14,9 @@ else
     alias grep="grep --perl-regexp --color=auto"
 fi
 if ls --hyperlink=auto --version &>/dev/null; then
-    alias ls="ls -Fvla --color=always --hyperlink=auto"
+    alias ls="ls -Fvla --group-directories-first --color=always --hyperlink=auto"
 else
-    alias ls="ls -Fvla --color=always"
+    alias ls="ls -Fvla --group-directories-first --color=always"
 fi
 if rm -I --version &>/dev/null; then
     alias rm="rm -vI"
