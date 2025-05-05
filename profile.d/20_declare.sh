@@ -6,6 +6,6 @@ readonly HT=$'\t'
 
 # Comma profile vars
 COMMA_PROFILEDIR="$HOME/.local/share/comma_bash_profile"
-COMMA_VERSION="1.0.9"
+COMMA_VERSION="1.1.0"
 # %COMMA_DATE_GENERATED%
 
