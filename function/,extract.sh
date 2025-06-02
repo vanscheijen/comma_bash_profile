@@ -1,11 +1,12 @@
 ,extract () {
-    local f_usage="<compressed file>"
-    local f_info="Automatically extract file using appropiate tool"
+    local f_usage="<compressed archive file>"
+    local f_info="Automatically extract archive file using the appropiate decompression tool into the current working directory"
 
-    [[ -s "$1" ]] || { ,,usage; return; }
+    local archive="$(realpath -e "$1")"
+    [[ $? == 0 && -s "$archive" ]] || { ,,usage; return; }
 
     local tool=""
-    case $1 in
+    case $archive in
         *.tar.gz|*.tar.bz2|*.tar.xz|*.tar.lzip|*.tar.lzma|*.tar.lzop|*.tar.Z|*.tar.zstd|*.tbz2|*.tgz|*.tar)
                 tool="tar xvafkp" ;;
         *.rar)  tool="unrar x" ;;
@@ -15,17 +16,18 @@
         *.bz2)  tool="bunzip2" ;;
         *.Z)    tool="uncompress" ;;
         *)
-            case $(file -b --mime-type -- "$1") in
+            case $(file -b --mime-type -- "$archive") in
                 application/zip) tool="unzip" ;;
             esac
     esac
 
-    [[ "$tool" ]] || { ,error "'$1' has an unknown compression format"; return 62; }
-    ,info "Using $tool to extract '$1'"
+    [[ "$tool" ]] || { ,error "'$archive' has an unknown compression format"; return 62; }
+
+    ,info "Using $tool to extract '$archive'"
     local origdir="$PWD"
     local tmpdir newname dircount filecount
     tmpdir="$(mktemp -d -p "$origdir")"
-    cd "$tmpdir" && $tool "$origdir/$1"
+    cd "$tmpdir" && $tool "$archive"
     cd "$origdir"
     dircount=$(\ls -d1q "$tmpdir/" | wc -l)
     filecount=$(\ls -1q "$tmpdir/" | wc -l)
