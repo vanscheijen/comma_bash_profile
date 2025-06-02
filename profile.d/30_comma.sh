@@ -29,6 +29,7 @@ alias ,pwgen='echo $(tr -dc A-Za-z0-9 < /dev/urandom | head -c$(,,columns))'
 alias ,reset=',echo $ERASE_SCREEN; stty sane'
 alias ,rot13="tr 'A-Za-z0-9' 'N-ZA-Mn-za-m5-90-4'"
 alias ,rot47="tr '!-~' 'P-~!-O'"
+alias ,atbash="tr 'A-Za-z' 'ZYXWVUTSRQPONMLKJIHGFEDCBAzyxwvutsrqponmlkjihgfedcba'"
 alias ,unhide="cat -t"
 alias ,showcrons='find /var/spool/cron/ /etc/cron.d/ /etc/cron.hourly/ /etc/cron.daily/ /etc/cron.weekly/ /etc/cron.monthly/ /etc/crontab -type f -exec cat {} \;'
 alias ,whatismyip='ip r | grep ^default; dig +short myip.opendns.com @resolver1.opendns.com'
