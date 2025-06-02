@@ -5,6 +5,6 @@
     local data="$@"
     [[ -s "$data" ]] && data="$(< "$data")" || [[ "$data" ]] || data="$(,ifne cat)" || { ,,usage; return; }
 
-    /usr/bin/perl -pe "s/<[^ ].*?>/ /g" <<< "$data"
+    /usr/bin/perl -pe "s/&amp;/&/g;s/&lt;/</g;s/&gt;/>/g;s/&quot;/\"/g;s/&apodata;/'/g;s/<[^ ].*?>/ /g" <<< "$data"
 }
 
