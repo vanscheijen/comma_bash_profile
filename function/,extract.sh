@@ -2,7 +2,8 @@
     local f_usage="<compressed archive file>"
     local f_info="Automatically extract archive file using the appropiate decompression tool into the current working directory"
 
-    local archive="$(realpath -e "$1")"
+    local archive
+    archive=$(realpath -e "$1" 2>/dev/null)
     [[ $? == 0 && -s "$archive" ]] || { ,,usage; return; }
 
     local tool=""
